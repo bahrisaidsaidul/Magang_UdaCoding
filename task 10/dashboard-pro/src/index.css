@@ -1,0 +1,112 @@
+@import url('https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700&display=swap');
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  :root {
+    --font-sans: 'Outfit', 'Inter', system-ui, sans-serif;
+    color-scheme: light dark;
+  }
+  
+  body {
+    @apply font-sans bg-brand-light text-brand-dark antialiased transition-colors duration-300;
+    margin: 0;
+  }
+
+  /* Premium scrollbars */
+  ::-webkit-scrollbar {
+    width: 6px;
+    height: 6px;
+  }
+  ::-webkit-scrollbar-track {
+    @apply bg-transparent;
+  }
+  ::-webkit-scrollbar-thumb {
+    @apply bg-neutral-300 rounded-full transition-colors duration-200 hover:bg-neutral-400;
+  }
+  
+  .dark ::-webkit-scrollbar-thumb {
+    @apply bg-neutral-700 hover:bg-neutral-600;
+  }
+}
+
+@layer utilities {
+  /* Skeleton loading animation */
+  .animate-shimmer {
+    background: linear-gradient(
+      90deg,
+      rgba(229, 227, 225, 0.6) 25%,
+      rgba(242, 240, 238, 0.9) 50%,
+      rgba(229, 227, 225, 0.6) 75%
+    );
+    background-size: 200% 100%;
+    animation: shimmer 1.5s infinite linear;
+  }
+
+  .dark .animate-shimmer {
+    background: linear-gradient(
+      90deg,
+      rgba(44, 37, 32, 0.6) 25%,
+      rgba(58, 48, 41, 0.9) 50%,
+      rgba(44, 37, 32, 0.6) 75%
+    );
+    background-size: 200% 100%;
+    animation: shimmer 1.5s infinite linear;
+  }
+  
+  /* Stagger animations for table rows and cards */
+  .animation-delay-100 { animation-delay: 100ms; }
+  .animation-delay-200 { animation-delay: 200ms; }
+  .animation-delay-300 { animation-delay: 300ms; }
+  .animation-delay-400 { animation-delay: 400ms; }
+}
+
+@keyframes shimmer {
+  0% {
+    background-position: 200% 0;
+  }
+  100% {
+    background-position: -200% 0;
+  }
+}
+
+/* Glassmorphism utility card styling */
+.glass-card {
+  @apply bg-white border border-neutral-100 shadow-premium rounded-2xl p-6 transition-all duration-300 hover:shadow-lg;
+}
+
+.dark .glass-card {
+  @apply bg-brand-dark border border-brand-active shadow-premium-dark rounded-2xl p-6 transition-all duration-300 hover:border-brand-gold/40;
+}
+
+/* Remove default number input arrows */
+input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+input[type=number] {
+  -moz-appearance: textfield;
+}
+
+/* Print layout optimizations */
+@media print {
+  body {
+    background: white !important;
+    color: black !important;
+  }
+  .no-print {
+    display: none !important;
+  }
+  .print-only {
+    display: block !important;
+  }
+  .print-card {
+    border: 1px solid #e5e7eb !important;
+    box-shadow: none !important;
+    background: white !important;
+    page-break-inside: avoid;
+  }
+}

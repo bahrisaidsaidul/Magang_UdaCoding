@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html lang="eng">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Toko Sembako Jakarta</title>
+
+  <link rel="shortcut icon" href="assets/logo-icon/profile.png" type="image/x-icon">
+
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="dist/css/style.css">
+  <link href="dist/css/hamburgers.css" rel="stylesheet">
+</head>
+<body>
+
+<!-- NAVBAR -->
+<nav class="navbar">
+  <div class="logo">SembakoJakarta</div>
+  <ul class="nav-links">
+    <li><a href="#home">Home</a></li>
+    <li><a href="#about">Tentang</a></li>
+    <li><a href="#produk">Produk</a></li>
+    <li><a href="#galeri">Galeri</a></li>
+    <li><a href="#kontak">Kontak</a></li>
+  </ul>
+  <div class="hamburger hamburger--spring" type="button">
+  <span class="hamburger-box">
+    <span class="hamburger-inner"></span>
+  </span>
+</div>
+</nav>
+
+<!-- HERO PREMIUM -->
+<section class="hero fade-in" id="home">
+  <div class="hero-content">
+    <div class="hero-text">
+      <h1>Toko Sembako Jakarta</h1>
+      <p>Kebutuhan harian lengkap dengan kualitas terbaik & harga bersahabat untuk warga Jakarta.</p>
+      <a href="#produk" class="btn">Belanja Sekarang</a>
+    </div>
+
+    <div class="hero-image">
+      <img src="assets/image/bg1.jpg" alt="Hero Image">
+    </div>
+  </div>
+</section>
+
+<!-- ABOUT -->
+<section class="about fade-in" id="about">
+  <div class="about-text">
+    <h2>Tentang Kami</h2>
+    <p>Kami adalah toko sembako terpercaya di Jakarta yang menyediakan kebutuhan pokok lengkap seperti beras, minyak, gula, telur dan lainnya dengan harga terjangkau.</p>
+  </div>
+  <div class="about-img">
+    <img src="https://source.unsplash.com/500x400/?market,indonesia" alt="">
+  </div>
+</section>
+
+<!-- PRODUK -->
+<section class="produk fade-in" id="produk">
+  <h2>Produk Unggulan</h2>
+  <div class="produk-grid">
+    <div class="card">
+      <img src="https://source.unsplash.com/300x200/?rice" alt="">
+      <h3>Beras Premium</h3>
+      <p>Rp 65.000 / 5kg</p>
+    </div>
+    <div class="card">
+      <img src="https://source.unsplash.com/300x200/?cooking-oil" alt="">
+      <h3>Minyak Goreng</h3>
+      <p>Rp 18.000 / liter</p>
+    </div>
+    <div class="card">
+      <img src="https://source.unsplash.com/300x200/?sugar" alt="">
+      <h3>Gula Pasir</h3>
+      <p>Rp 15.000 / kg</p>
+    </div>
+    <div class="card">
+      <img src="https://source.unsplash.com/300x200/?eggs" alt="">
+      <h3>Telur Ayam</h3>
+      <p>Rp 28.000 / kg</p>
+    </div>
+  </div>
+</section>
+
+<!-- GALERI -->
+<section class="galeri fade-in" id="galeri">
+  <h2>Galeri Toko</h2>
+  <div class="galeri-grid">
+    <img src="assets/image/img1.jpg" alt="">
+    <img src="assets/image/img2.jpg" alt="">
+    <img src="assets/image/img3.jpg" alt="">
+    <img src="assets/image/img4.jpg" alt="">
+    <img src="assets/image/img5.jpg" alt="">
+    <img src="assets/image/img6.jpg" alt="">
+  </div>
+</section>
+
+<!-- KONTAK -->
+<section class="kontak fade-in" id="kontak">
+  <h2>Hubungi Kami</h2>
+  <form>
+    <input type="text" placeholder="Nama" required>
+    <input type="email" placeholder="Email">
+    <textarea placeholder="Pesan" required></textarea>
+    <button type="submit">Kirim Pesan</button>
+  </form>
+</section>
+
+<footer>
+  <p>© 2026 Toko Sembako Jakarta</p>
+</footer>
+
+<script>
+const hamburger = document.querySelector('.hamburger');
+const navLinks = document.querySelector('.nav-links');
+hamburger.addEventListener('click', () => {
+  hamburger.classList.toggle("is-active");
+  navLinks.classList.toggle('.active');
+});
+
+// Scroll Reveal Smooth
+const faders = document.querySelectorAll('.fade-in');
+const observer = new IntersectionObserver(entries => {
+  entries.forEach(entry => {
+    if(entry.isIntersecting){
+      entry.target.classList.add('appear');
+    }
+  });
+},{ threshold: 0.2 });
+
+faders.forEach(f => observer.observe(f));
+</script>
+
+</body>
+</html>
