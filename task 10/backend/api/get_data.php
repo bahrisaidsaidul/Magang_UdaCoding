@@ -102,6 +102,36 @@ try {
     $stmt->execute();
     $projects = $stmt->fetchAll(PDO::FETCH_ASSOC);
     
+    // Auto-sync: If projects table is empty but invoices has data, copy invoices to projects
+    if (count($projects) === 0 && count($invoices) > 0) {
+        $statusMap = [
+            'paid' => 'completed',
+            'pending' => 'pending',
+            'overdue' => 'on-hold'
+        ];
+        foreach ($invoices as $inv) {
+            $projStatus = $statusMap[$inv['status']] ?? 'pending';
+            $stmtSync = $pdo->prepare("INSERT INTO projects (id, name, client, revenue, hours, status, priority, start_date, end_date, created_by, created_at) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)");
+            $stmtSync->execute([
+                $inv['id'],
+                $inv['project_name'],
+                $inv['client'],
+                $inv['amount'],
+                0,
+                $projStatus,
+                'medium',
+                $inv['date'],
+                $inv['date'],
+                $inv['created_by'],
+                $inv['created_at']
+            ]);
+        }
+        // Re-fetch projects after sync
+        $stmt = $pdo->prepare("SELECT * FROM projects ORDER BY created_at DESC");
+        $stmt->execute();
+        $projects = $stmt->fetchAll(PDO::FETCH_ASSOC);
+    }
+    
     // If invoices table is empty but projects exist, calculate stats from projects
     if ((float)$totalOmset === 0.0 && count($projects) > 0) {
         $totalOmset = array_sum(array_column($projects, 'revenue'));
